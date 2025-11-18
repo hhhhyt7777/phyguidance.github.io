@@ -80,62 +80,6 @@
             max-width: 720px;
         }
 
-        .meta-row {
-            margin-top: 14px;
-            display: flex;
-            flex-wrap: wrap;
-            gap: 10px 20px;
-            font-size: 13px;
-            color: var(--text-muted);
-        }
-
-        .meta-row span b {
-            color: var(--text-main);
-        }
-
-        .top-links {
-            margin-top: 18px;
-            display: flex;
-            flex-wrap: wrap;
-            gap: 10px;
-        }
-
-        .btn {
-            display: inline-flex;
-            align-items: center;
-            justify-content: center;
-            gap: 6px;
-            padding: 8px 14px;
-            border-radius: 999px;
-            font-size: 13px;
-            border: 1px solid rgba(148, 163, 184, 0.5);
-            color: var(--text-main);
-            text-decoration: none;
-            background: rgba(15, 23, 42, 0.9);
-            transition: all 0.18s ease-out;
-        }
-
-        .btn-primary {
-            background: linear-gradient(135deg, #38bdf8, #6366f1);
-            border-color: transparent;
-            box-shadow: 0 12px 30px rgba(56, 189, 248, 0.35);
-        }
-
-        .btn span.icon {
-            font-size: 15px;
-        }
-
-        .btn:hover {
-            transform: translateY(-1px);
-            box-shadow: 0 14px 36px rgba(15, 23, 42, 0.7);
-            border-color: rgba(148, 163, 184, 0.9);
-        }
-
-        .btn-primary:hover {
-            box-shadow: 0 16px 40px rgba(56, 189, 248, 0.6);
-            filter: brightness(1.05);
-        }
-
         /* Card layout */
         .card {
             background: linear-gradient(145deg, rgba(15, 23, 42, 0.96), rgba(15, 23, 42, 0.94));
@@ -168,23 +112,6 @@
             color: var(--text-muted);
         }
 
-        .pill-row {
-            display: flex;
-            flex-wrap: wrap;
-            gap: 6px;
-            margin-top: 10px;
-        }
-
-        .pill {
-            font-size: 11px;
-            padding: 4px 9px;
-            border-radius: 999px;
-            border: 1px solid rgba(148, 163, 184, 0.4);
-            color: var(--text-muted);
-            background: rgba(15, 23, 42, 0.9);
-        }
-
-        /* New: Pipeline & Results images */
         .image-grid {
             margin-top: 12px;
             display: flex;
@@ -215,44 +142,52 @@
             color: var(--text-muted);
         }
 
-        /* Metrics mini-table (if you still want a small one) */
         .metric-note {
             margin-top: 10px;
             font-size: 12px;
             color: var(--text-muted);
         }
 
-        /* Videos */
-        .videos-header {
+        /* Video comparison layout */
+        .gallery {
             display: flex;
-            justify-content: space-between;
-            align-items: baseline;
-            gap: 8px;
-        }
-
-        .videos-header p {
-            font-size: 13px;
-            color: var(--text-muted);
-        }
-
-        .video-grid {
-            margin-top: 14px;
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
-            gap: 14px;
+            flex-direction: column;
+            gap: 18px;
         }
 
         .video-card {
             background: radial-gradient(circle at top, rgba(148, 163, 184, 0.18), rgba(15, 23, 42, 0.96));
             border-radius: var(--radius-lg);
             border: 1px solid rgba(148, 163, 184, 0.3);
-            padding: 10px;
+            padding: 12px 14px 14px;
             display: flex;
             flex-direction: column;
-            gap: 6px;
+            gap: 8px;
         }
 
-        .video-thumb-wrap {
+        .video-card .prompt {
+            font-size: 13px;
+            color: var(--text-main);
+        }
+
+        .video-card .prompt span {
+            font-weight: 600;
+            margin-right: 6px;
+        }
+
+        .pair {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 12px;
+            margin-top: 6px;
+        }
+
+        .pair>div {
+            flex: 1 1 0;
+            min-width: 220px;
+        }
+
+        .video-wrapper {
             position: relative;
             width: 100%;
             aspect-ratio: 4 / 3;
@@ -261,42 +196,18 @@
             background: #020617;
         }
 
-        video {
+        .video-wrapper video {
             width: 100%;
             height: 100%;
             object-fit: cover;
             display: block;
         }
 
-        .video-tag {
-            position: absolute;
-            top: 8px;
-            left: 8px;
-            font-size: 11px;
-            padding: 2px 7px;
-            border-radius: 999px;
-            background: rgba(15, 23, 42, 0.85);
-            border: 1px solid rgba(148, 163, 184, 0.7);
-            color: var(--text-muted);
-            backdrop-filter: blur(8px);
-        }
-
-        .video-caption {
+        .video-label {
+            margin-top: 4px;
             font-size: 12px;
             color: var(--text-muted);
-            min-height: 2.4em;
-        }
-
-        .video-caption b {
-            color: var(--text-main);
             font-weight: 500;
-        }
-
-        footer {
-            margin-top: 26px;
-            font-size: 11px;
-            color: var(--text-muted);
-            text-align: right;
         }
 
         @media (max-width: 640px) {
@@ -308,8 +219,8 @@
                 padding: 18px 16px 16px;
             }
 
-            .video-grid {
-                grid-template-columns: 1fr;
+            .pair {
+                flex-direction: column;
             }
         }
     </style>
@@ -321,27 +232,14 @@
         <header>
             <div class="badge">
                 <span class="badge-dot"></span>
-                <!-- Enhancing Physical Plausibility in Video Generation -->
+                <span>Physics-Aware Video Generation</span>
             </div>
             <h1>Enhancing Physical Plausibility in Video Generation by Reasoning the Implausibility</h1>
             <p class="subtitle">
-                A guidance framework that explicitly identifies and suppresses physically implausible trajectories,
-                enabling text-to-video models to generate videos with stronger physical consistency while preserving
-                fidelity.
+                A training-free guidance framework that explicitly identifies and suppresses physically implausible
+                trajectories, enabling text-to-video models to generate videos with stronger physical consistency while
+                preserving visual fidelity.
             </p>
-            <!-- <div class="meta-row"> -->
-                <!-- <span><b>Paper:</b> 2025 (submitted)</span> -->
-                <!-- <span><b>Task:</b> Physical-commonsense video generation</span> -->
-                <!-- <span><b>Models:</b> Wan 2.1-14B, CogVideoX-5B</span> -->
-            <!-- </div> -->
-            <!-- <div class="top-links">
-                <a class="btn btn-primary" href="paper.pdf" target="_blank">
-                    <span class="icon">📄</span> Paper
-                </a>
-                <a class="btn" href="https://github.com/your-repo" target="_blank">
-                    <span class="icon">💻</span> Code
-                </a>
-            </div> -->
         </header>
 
         <!-- Abstract -->
@@ -354,70 +252,54 @@
                 training-free framework that improves physical plausibility at inference time by explicitly reasoning
                 about implausibility and guiding the generation away from it. Specifically, we employ a lightweight
                 physics-aware reasoning pipeline to construct counterfactual prompts that deliberately encode
-                physics-violating behaviors. Then, we propose a novel Synchronized Decoupled Guidance (SDG)
-                strategy, which leverages these prompts through synchronized directional normalization to counteract
-                lagged suppression and trajectory-decoupled denoising to mitigate cumulative trajectory bias, ensuring
-                that implausible content is suppressed immediately and consistently throughout denoising. Experiments
-                across different physical domains show that our approach substantially enhances physical fidelity while
-                maintaining photorealism, despite requiring no additional training. Ablation studies confirm the
-                complementary effectiveness of both the physics-aware reasoning component and SDG. In particular, the
-                aforementioned two designs of SDG are also individually validated to contribute critically to the
-                suppression of implausible content and the overall gains in physical plausibility. This establishes a
-                new and plug-and-play physics-aware paradigm for video generation.
+                physics-violating behaviors. Then, we propose a Synchronized Decoupled Guidance (SDG) strategy, which
+                leverages these prompts through synchronized directional normalization to counteract lagged suppression
+                and trajectory-decoupled denoising to mitigate cumulative trajectory bias. Experiments across different
+                physical domains show that our approach substantially enhances physical fidelity while maintaining
+                photorealism, despite requiring no additional training.
             </p>
-            <!-- <div class="pill-row">
-                <span class="pill">Inference-time guidance</span>
-                <span class="pill">Physical plausibility</span>
-                <span class="pill">Trajectory-decoupled denoising</span>
-                <span class="pill">Counterfactual suppression</span> -->
-            </div>
         </section>
 
-        <!-- NEW: Pipeline & Results images instead of baseline table -->
+        <!-- Pipeline & Results images -->
         <section class="card">
             <h2>Method Overview & Key Results</h2>
             <p>
-                We visualize our trajectory-guided pipeline and qualitative improvements on representative physical
-                scenarios. The first figure shows how we build counterfactual branches and suppress implausible
-                trajectories; the second figure compares baseline vs. ours on challenging prompts.
+                The first figure illustrates how physics-aware reasoning constructs counterfactual trajectories and how
+                SDG suppresses implausible branches; the second figure shows qualitative improvements on challenging
+                physical scenarios.
             </p>
 
             <div class="image-grid">
-                <!-- Pipeline figure -->
                 <div class="image-card">
-                    <!-- TODO: 替换为你的 pipeline 图片文件名 -->
-                    <img src="pipeline_overview.png"
-                        alt="Method pipeline: synchronized guidance and trajectory-decoupled denoising." />
+                    <!-- TODO: 替换为你的 pipeline 图片 -->
+                    <img src="assets/pipeline_overview.png"
+                        alt="Pipeline: physics-aware reasoning and synchronized decoupled guidance." />
                     <div class="image-caption">
-                        <b>Figure 1.</b> Overall pipeline of the proposed synchronized, trajectory-decoupled guidance.
-                        We construct a counterfactual branch to capture implausible trajectories and subtract them from
-                        the main denoising path.
+                        <b>Figure 1.</b> Overview of the physics-aware reasoning and synchronized decoupled guidance
+                        pipeline.
                     </div>
                 </div>
 
-                <!-- Qualitative results figure -->
                 <div class="image-card">
-                    <!-- TODO: 替换为你的 result/qualitative 对比 图 -->
-                    <img src="qualitative_results.png"
-                        alt="Qualitative comparison between baseline and our method on physical scenarios." />
+                    <!-- TODO: 替换为你的 qualitative 结果图片 -->
+                    <img src="assets/qualitative_results.png"
+                        alt="Qualitative comparison between baseline and our method." />
                     <div class="image-caption">
-                        <b>Figure 2.</b> Qualitative comparison on physical-commonsense benchmarks. Our method yields
-                        more consistent trajectories (e.g., collisions, gravity, rigid-body motion) while keeping image
-                        quality comparable to the baseline.
+                        <b>Figure 2.</b> Qualitative comparison on representative prompts. Our method better respects
+                        gravity, collisions, and rigid-body motion.
                     </div>
                 </div>
             </div>
 
             <p class="metric-note">
-                <i>Note:</i> For full quantitative results (FVD, CLIP-based physical similarity, and VBench metrics),
-                please refer to the main paper.
+                For full quantitative results (FVD, CLIPSIM, and VBench metrics), please refer to the main paper.
             </p>
         </section>
 
-        <!-- Video gallery -->
-        <section class="section" id="videos">
-            <h3>Qualitative Comparisons (15 Pairs)</h3>
-            <p style="margin-bottom:12px;font-size:0.9rem;">
+        <!-- Video gallery: 7 pairs -->
+        <section class="card" id="videos">
+            <h2>Qualitative Comparisons (7 Pairs)</h2>
+            <p style="margin-bottom:12px;font-size:0.9rem;color:var(--text-muted);">
                 Each block shows a prompt, the baseline model output, and our method. All videos are rendered at a 4:3
                 aspect ratio.
             </p>
@@ -427,12 +309,14 @@
                 <div class="video-card">
                     <div class="prompt">
                         <span>Prompt 1:</span>
-                        A silver spoon is slowly inserted into a glass of crystal-clear water, revealing realistic
-                        refraction and motion.
+                        A concentrated, bright beam of light generated by a laser pointer is passing through a glass of
+                        thick whole milk, creating a mesmerizing display as the light interacts with the milk's
+                        particles, casting intricate patterns and subtle hues within the fluid.
                     </div>
                     <div class="pair">
                         <div>
                             <div class="video-wrapper">
+                                <!-- TODO: 换成你自己的 Baseline 视频路径 -->
                                 <video controls loop muted>
                                     <source src="assets/high_quality_videos/pair01/baseline.mp4" type="video/mp4">
                                     Your browser does not support the video tag.
@@ -442,6 +326,7 @@
                         </div>
                         <div>
                             <div class="video-wrapper">
+                                <!-- TODO: 换成你自己的 Ours 视频路径 -->
                                 <video controls loop muted>
                                     <source src="assets/high_quality_videos/pair01/ours.mp4" type="video/mp4">
                                     Your browser does not support the video tag.
@@ -456,8 +341,8 @@
                 <div class="video-card">
                     <div class="prompt">
                         <span>Prompt 2:</span>
-                        A red ball is dropped from a balcony and bounces realistically on the ground following physical
-                        gravity.
+                        A metal fork is gently placed into a glass of crystal-clear water, displaying the interesting
+                        visual distortions and reflections as the fork meets the liquid.
                     </div>
                     <div class="pair">
                         <div>
@@ -483,8 +368,8 @@
                 <div class="video-card">
                     <div class="prompt">
                         <span>Prompt 3:</span>
-                        A glass of water is slowly tilted until it spills, with physically plausible liquid motion and
-                        volume.
+                        A silver spoon is slowly inserted into a glass of crystal-clear water, revealing the fascinating
+                        visual changes and reflections as the spoon interacts with the liquid.
                     </div>
                     <div class="pair">
                         <div>
@@ -510,7 +395,7 @@
                 <div class="video-card">
                     <div class="prompt">
                         <span>Prompt 4:</span>
-                        A metal pendulum swings back and forth under gravity with slowly decaying amplitude.
+                        A small burning stick was thrown into a pile of hay.
                     </div>
                     <div class="pair">
                         <div>
@@ -536,7 +421,8 @@
                 <div class="video-card">
                     <div class="prompt">
                         <span>Prompt 5:</span>
-                        A small toy car accelerates down a slope and brakes smoothly at the bottom.
+                        A timelapse captures the transformation of soup in a saucepan as the temperature rapidly rises
+                        above 100°C.
                     </div>
                     <div class="pair">
                         <div>
@@ -562,7 +448,8 @@
                 <div class="video-card">
                     <div class="prompt">
                         <span>Prompt 6:</span>
-                        A ball is thrown upward and falls back down following a realistic parabolic trajectory.
+                        A timelapse captures the transformation of tea in a teapot as the temperature rapidly rises
+                        above 100°C.
                     </div>
                     <div class="pair">
                         <div>
@@ -588,7 +475,7 @@
                 <div class="video-card">
                     <div class="prompt">
                         <span>Prompt 7:</span>
-                        A block slides on an icy surface with very low friction, gradually slowing down.
+                        A timelapse captures the transformation of water in a pot as the temperature rapidly rises above 100°C.
                     </div>
                     <div class="pair">
                         <div>
@@ -609,13 +496,9 @@
                         </div>
                     </div>
                 </div>
+
             </div>
         </section>
-
-        <div class="footer-note">
-            Replace titles, numbers, and video paths with your own content. All videos are assumed to be in
-            <code>assets/videos/</code>.
-        </div>
     </div>
 </body>
 
