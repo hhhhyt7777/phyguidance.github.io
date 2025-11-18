@@ -112,16 +112,23 @@
             color: var(--text-muted);
         }
 
+        /* Pipeline & result images: vertical layout */
         .image-grid {
             margin-top: 12px;
             display: flex;
-            flex-wrap: wrap;
-            gap: 16px;
+            flex-direction: column;
+            gap: 18px;
+        }
+
+        .image-block-title {
+            font-size: 14px;
+            font-weight: 600;
+            margin-bottom: 6px;
+            color: var(--text-main);
         }
 
         .image-card {
-            flex: 1 1 280px;
-            min-width: 0;
+            width: 100%;
             background: radial-gradient(circle at top left, rgba(56, 189, 248, 0.12), transparent 60%);
             border-radius: var(--radius-lg);
             border: 1px solid rgba(148, 163, 184, 0.35);
@@ -182,7 +189,7 @@
             margin-top: 6px;
         }
 
-        .pair>div {
+        .pair > div {
             flex: 1 1 0;
             min-width: 220px;
         }
@@ -227,278 +234,280 @@
 </head>
 
 <body>
-    <div class="page">
-        <!-- Header -->
-        <header>
-            <div class="badge">
-                <span class="badge-dot"></span>
-                <span>Physics-Aware Video Generation</span>
-            </div>
-            <h1>Enhancing Physical Plausibility in Video Generation by Reasoning the Implausibility</h1>
-            <p class="subtitle">
-                A training-free guidance framework that explicitly identifies and suppresses physically implausible
-                trajectories, enabling text-to-video models to generate videos with stronger physical consistency while
-                preserving visual fidelity.
-            </p>
-        </header>
+<div class="page">
+    <!-- Header -->
+    <header>
+        <div class="badge">
+            <span class="badge-dot"></span>
+            <span>Physics-Aware Video Generation</span>
+        </div>
+        <h1>Enhancing Physical Plausibility in Video Generation by Reasoning the Implausibility</h1>
+        <p class="subtitle">
+            A training-free guidance framework that explicitly identifies and suppresses physically implausible
+            trajectories, enabling text-to-video models to generate videos with stronger physical consistency while
+            preserving visual fidelity.
+        </p>
+    </header>
 
-        <!-- Abstract -->
-        <section class="card">
-            <h2>Abstract</h2>
-            <p>
-                Diffusion models can generate realistic videos, but existing methods rely on implicitly learning
-                physical reasoning from large-scale text-video datasets, which is costly, difficult to scale, and still
-                prone to producing implausible motions that violate fundamental physical laws. We introduce a
-                training-free framework that improves physical plausibility at inference time by explicitly reasoning
-                about implausibility and guiding the generation away from it. Specifically, we employ a lightweight
-                physics-aware reasoning pipeline to construct counterfactual prompts that deliberately encode
-                physics-violating behaviors. Then, we propose a Synchronized Decoupled Guidance (SDG) strategy, which
-                leverages these prompts through synchronized directional normalization to counteract lagged suppression
-                and trajectory-decoupled denoising to mitigate cumulative trajectory bias. Experiments across different
-                physical domains show that our approach substantially enhances physical fidelity while maintaining
-                photorealism, despite requiring no additional training.
-            </p>
-        </section>
+    <!-- Abstract -->
+    <section class="card">
+        <h2>Abstract</h2>
+        <p>
+            Diffusion models can generate realistic videos, but existing methods rely on implicitly learning
+            physical reasoning from large-scale text-video datasets, which is costly, difficult to scale, and still
+            prone to producing implausible motions that violate fundamental physical laws. We introduce a
+            training-free framework that improves physical plausibility at inference time by explicitly reasoning
+            about implausibility and guiding the generation away from it. Specifically, we employ a lightweight
+            physics-aware reasoning pipeline to construct counterfactual prompts that deliberately encode
+            physics-violating behaviors. Then, we propose a Synchronized Decoupled Guidance (SDG) strategy, which
+            leverages these prompts through synchronized directional normalization to counteract lagged suppression
+            and trajectory-decoupled denoising to mitigate cumulative trajectory bias. Experiments across different
+            physical domains show that our approach substantially enhances physical fidelity while maintaining
+            photorealism, despite requiring no additional training.
+        </p>
+    </section>
 
-        <!-- Pipeline & Results images -->
-        <section class="card">
-            <h2>Method Overview & Key Results</h2>
-            <p>
-                The first figure illustrates how physics-aware reasoning constructs counterfactual trajectories and how
-                SDG suppresses implausible branches; the second figure shows qualitative improvements on challenging
-                physical scenarios.
-            </p>
+    <!-- Pipeline & Results images (vertical) -->
+    <section class="card">
+        <h2>Method Overview & Key Results</h2>
+        <p>
+            The first figure illustrates how physics-aware reasoning constructs counterfactual trajectories and how
+            Synchronized Decoupled Guidance (SDG) suppresses implausible branches; the second figure shows qualitative
+            improvements on challenging physical scenarios.
+        </p>
 
-            <div class="image-grid">
+        <div class="image-grid">
+            <!-- Row 1: Pipeline -->
+            <div>
+                <div class="image-block-title">Pipeline</div>
                 <div class="image-card">
-                    <!-- TODO: 替换为你的 pipeline 图片 -->
-                    <img src="assets/pipeline_overview.pdf"
-                        alt="Pipeline: physics-aware reasoning and synchronized decoupled guidance." />
+                    <img src="assets/pipeline_overview.png"
+                         alt="Pipeline: physics-aware reasoning and synchronized decoupled guidance.">
                     <div class="image-caption">
-                        <b>Figure 1.</b> Overview of the physics-aware reasoning and synchronized decoupled guidance
-                        pipeline.
+                        <b>Figure 1.</b>
                     </div>
                 </div>
+            </div>
 
+            <!-- Row 2: Qualitative results -->
+            <div>
+                <div class="image-block-title">Qualitative Results</div>
                 <div class="image-card">
-                    <!-- TODO: 替换为你的 qualitative 结果图片 -->
                     <img src="assets/qualitative_results.png"
-                        alt="Qualitative comparison between baseline and our method." />
+                         alt="Qualitative comparison between baseline and our method.">
                     <div class="image-caption">
-                        <b>Figure 2.</b> Qualitative comparison on representative prompts. Our method better respects
-                        gravity, collisions, and rigid-body motion.
+                        <b>Figure 2.</b>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- <p class="metric-note">
+            For full quantitative results (FVD, CLIPSIM, and VBench metrics), please refer to the main paper. -->
+        </p>
+    </section>
+
+    <!-- Video gallery: 7 pairs -->
+    <section class="card" id="videos">
+        <h2>Qualitative Comparisons (7 Pairs)</h2>
+        <p style="margin-bottom:12px;font-size:0.9rem;color:var(--text-muted);">
+            Each block shows a prompt, the baseline model output, and our method.
+        </p>
+
+        <div class="gallery">
+            <!-- Pair 1 -->
+            <div class="video-card">
+                <div class="prompt">
+                    <span>Prompt 1:</span>
+                    A concentrated, bright beam of light generated by a laser pointer is passing through a glass of
+                    thick whole milk, creating a mesmerizing display as the light interacts with the milk's
+                    particles, casting intricate patterns and subtle hues within the fluid.
+                </div>
+                <div class="pair">
+                    <div>
+                        <div class="video-wrapper">
+                            <video controls loop muted>
+                                <source src="assets/high_quality_video/pair01/baseline.mp4" type="video/mp4">
+                                Your browser does not support the video tag.
+                            </video>
+                        </div>
+                        <div class="video-label">Baseline</div>
+                    </div>
+                    <div>
+                        <div class="video-wrapper">
+                            <video controls loop muted>
+                                <source src="assets/high_quality_video/pair01/ours.mp4" type="video/mp4">
+                                Your browser does not support the video tag.
+                            </video>
+                        </div>
+                        <div class="video-label">Ours</div>
                     </div>
                 </div>
             </div>
 
-            <!-- <p class="metric-note">
-                For full quantitative results (FVD, CLIPSIM, and VBench metrics), please refer to the main paper. -->
-            </p>
-        </section>
-
-        <!-- Video gallery: 7 pairs -->
-        <section class="card" id="videos">
-            <h2>Qualitative Comparisons (7 Pairs)</h2>
-            <p style="margin-bottom:12px;font-size:0.9rem;color:var(--text-muted);">
-                Each block shows a prompt, the baseline model output, and our method.
-            </p>
-
-            <div class="gallery">
-                <!-- Pair 1 -->
-                <div class="video-card">
-                    <div class="prompt">
-                        <span>Prompt 1:</span>
-                        A concentrated, bright beam of light generated by a laser pointer is passing through a glass of
-                        thick whole milk, creating a mesmerizing display as the light interacts with the milk's
-                        particles, casting intricate patterns and subtle hues within the fluid.
+            <!-- Pair 2 -->
+            <div class="video-card">
+                <div class="prompt">
+                    <span>Prompt 2:</span>
+                    A metal fork is gently placed into a glass of crystal-clear water, displaying the interesting
+                    visual distortions and reflections as the fork meets the liquid.
+                </div>
+                <div class="pair">
+                    <div>
+                        <div class="video-wrapper">
+                            <video controls loop muted>
+                                <source src="assets/high_quality_video/pair02/baseline.mp4" type="video/mp4">
+                            </video>
+                        </div>
+                        <div class="video-label">Baseline</div>
                     </div>
-                    <div class="pair">
-                        <div>
-                            <div class="video-wrapper">
-                                <!-- TODO: 换成你自己的 Baseline 视频路径 -->
-                                <video controls loop muted>
-                                    <source src="assets/high_quality_video/pair01/baseline.mp4" type="video/mp4">
-                                    Your browser does not support the video tag.
-                                </video>
-                            </div>
-                            <div class="video-label">Baseline</div>
+                    <div>
+                        <div class="video-wrapper">
+                            <video controls loop muted>
+                                <source src="assets/high_quality_video/pair02/ours.mp4" type="video/mp4">
+                            </video>
                         </div>
-                        <div>
-                            <div class="video-wrapper">
-                                <!-- TODO: 换成你自己的 Ours 视频路径 -->
-                                <video controls loop muted>
-                                    <source src="assets/high_quality_video/pair01/ours.mp4" type="video/mp4">
-                                    Your browser does not support the video tag.
-                                </video>
-                            </div>
-                            <div class="video-label">Ours</div>
-                        </div>
+                        <div class="video-label">Ours</div>
                     </div>
                 </div>
-
-                <!-- Pair 2 -->
-                <div class="video-card">
-                    <div class="prompt">
-                        <span>Prompt 2:</span>
-                        A metal fork is gently placed into a glass of crystal-clear water, displaying the interesting
-                        visual distortions and reflections as the fork meets the liquid.
-                    </div>
-                    <div class="pair">
-                        <div>
-                            <div class="video-wrapper">
-                                <video controls loop muted>
-                                    <source src="assets/high_quality_video/pair02/baseline.mp4" type="video/mp4">
-                                </video>
-                            </div>
-                            <div class="video-label">Baseline</div>
-                        </div>
-                        <div>
-                            <div class="video-wrapper">
-                                <video controls loop muted>
-                                    <source src="assets/high_quality_video/pair02/ours.mp4" type="video/mp4">
-                                </video>
-                            </div>
-                            <div class="video-label">Ours</div>
-                        </div>
-                    </div>
-                </div>
-
-                <!-- Pair 3 -->
-                <div class="video-card">
-                    <div class="prompt">
-                        <span>Prompt 3:</span>
-                        A silver spoon is slowly inserted into a glass of crystal-clear water, revealing the fascinating
-                        visual changes and reflections as the spoon interacts with the liquid.
-                    </div>
-                    <div class="pair">
-                        <div>
-                            <div class="video-wrapper">
-                                <video controls loop muted>
-                                    <source src="assets/high_quality_video/pair03/baseline.mp4" type="video/mp4">
-                                </video>
-                            </div>
-                            <div class="video-label">Baseline</div>
-                        </div>
-                        <div>
-                            <div class="video-wrapper">
-                                <video controls loop muted>
-                                    <source src="assets/high_quality_video/pair03/ours.mp4" type="video/mp4">
-                                </video>
-                            </div>
-                            <div class="video-label">Ours</div>
-                        </div>
-                    </div>
-                </div>
-
-                <!-- Pair 4 -->
-                <div class="video-card">
-                    <div class="prompt">
-                        <span>Prompt 4:</span>
-                        A small burning stick was thrown into a pile of hay.
-                    </div>
-                    <div class="pair">
-                        <div>
-                            <div class="video-wrapper">
-                                <video controls loop muted>
-                                    <source src="assets/high_quality_video/pair04/baseline.mp4" type="video/mp4">
-                                </video>
-                            </div>
-                            <div class="video-label">Baseline</div>
-                        </div>
-                        <div>
-                            <div class="video-wrapper">
-                                <video controls loop muted>
-                                    <source src="assets/high_quality_video/pair04/ours.mp4" type="video/mp4">
-                                </video>
-                            </div>
-                            <div class="video-label">Ours</div>
-                        </div>
-                    </div>
-                </div>
-
-                <!-- Pair 5 -->
-                <div class="video-card">
-                    <div class="prompt">
-                        <span>Prompt 5:</span>
-                        A timelapse captures the transformation of soup in a saucepan as the temperature rapidly rises
-                        above 100°C.
-                    </div>
-                    <div class="pair">
-                        <div>
-                            <div class="video-wrapper">
-                                <video controls loop muted>
-                                    <source src="assets/high_quality_video/pair05/baseline.mp4" type="video/mp4">
-                                </video>
-                            </div>
-                            <div class="video-label">Baseline</div>
-                        </div>
-                        <div>
-                            <div class="video-wrapper">
-                                <video controls loop muted>
-                                    <source src="assets/high_quality_video/pair05/ours.mp4" type="video/mp4">
-                                </video>
-                            </div>
-                            <div class="video-label">Ours</div>
-                        </div>
-                    </div>
-                </div>
-
-                <!-- Pair 6 -->
-                <div class="video-card">
-                    <div class="prompt">
-                        <span>Prompt 6:</span>
-                        A timelapse captures the transformation of tea in a teapot as the temperature rapidly rises
-                        above 100°C.
-                    </div>
-                    <div class="pair">
-                        <div>
-                            <div class="video-wrapper">
-                                <video controls loop muted>
-                                    <source src="assets/high_quality_video/pair06/baseline.mp4" type="video/mp4">
-                                </video>
-                            </div>
-                            <div class="video-label">Baseline</div>
-                        </div>
-                        <div>
-                            <div class="video-wrapper">
-                                <video controls loop muted>
-                                    <source src="assets/high_quality_video/pair06/ours.mp4" type="video/mp4">
-                                </video>
-                            </div>
-                            <div class="video-label">Ours</div>
-                        </div>
-                    </div>
-                </div>
-
-                <!-- Pair 7 -->
-                <div class="video-card">
-                    <div class="prompt">
-                        <span>Prompt 7:</span>
-                        A timelapse captures the transformation of water in a pot as the temperature rapidly rises above 100°C.
-                    </div>
-                    <div class="pair">
-                        <div>
-                            <div class="video-wrapper">
-                                <video controls loop muted>
-                                    <source src="assets/high_quality_video/pair07/baseline.mp4" type="video/mp4">
-                                </video>
-                            </div>
-                            <div class="video-label">Baseline</div>
-                        </div>
-                        <div>
-                            <div class="video-wrapper">
-                                <video controls loop muted>
-                                    <source src="assets/high_quality_video/pair07/ours.mp4" type="video/mp4">
-                                </video>
-                            </div>
-                            <div class="video-label">Ours</div>
-                        </div>
-                    </div>
-                </div>
-
             </div>
-        </section>
-    </div>
+
+            <!-- Pair 3 -->
+            <div class="video-card">
+                <div class="prompt">
+                    <span>Prompt 3:</span>
+                    A silver spoon is slowly inserted into a glass of crystal-clear water, revealing the fascinating
+                    visual changes and reflections as the spoon interacts with the liquid.
+                </div>
+                <div class="pair">
+                    <div>
+                        <div class="video-wrapper">
+                            <video controls loop muted>
+                                <source src="assets/high_quality_video/pair03/baseline.mp4" type="video/mp4">
+                            </video>
+                        </div>
+                        <div class="video-label">Baseline</div>
+                    </div>
+                    <div>
+                        <div class="video-wrapper">
+                            <video controls loop muted>
+                                <source src="assets/high_quality_video/pair03/ours.mp4" type="video/mp4">
+                            </video>
+                        </div>
+                        <div class="video-label">Ours</div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Pair 4 -->
+            <div class="video-card">
+                <div class="prompt">
+                    <span>Prompt 4:</span>
+                    A small burning stick was thrown into a pile of hay.
+                </div>
+                <div class="pair">
+                    <div>
+                        <div class="video-wrapper">
+                            <video controls loop muted>
+                                <source src="assets/high_quality_video/pair04/baseline.mp4" type="video/mp4">
+                            </video>
+                        </div>
+                        <div class="video-label">Baseline</div>
+                    </div>
+                    <div>
+                        <div class="video-wrapper">
+                            <video controls loop muted>
+                                <source src="assets/high_quality_video/pair04/ours.mp4" type="video/mp4">
+                            </video>
+                        </div>
+                        <div class="video-label">Ours</div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Pair 5 -->
+            <div class="video-card">
+                <div class="prompt">
+                    <span>Prompt 5:</span>
+                    A timelapse captures the transformation of soup in a saucepan as the temperature rapidly rises
+                    above 100°C.
+                </div>
+                <div class="pair">
+                    <div>
+                        <div class="video-wrapper">
+                            <video controls loop muted>
+                                <source src="assets/high_quality_video/pair05/baseline.mp4" type="video/mp4">
+                            </video>
+                        </div>
+                        <div class="video-label">Baseline</div>
+                    </div>
+                    <div>
+                        <div class="video-wrapper">
+                            <video controls loop muted>
+                                <source src="assets/high_quality_video/pair05/ours.mp4" type="video/mp4">
+                            </video>
+                        </div>
+                        <div class="video-label">Ours</div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Pair 6 -->
+            <div class="video-card">
+                <div class="prompt">
+                    <span>Prompt 6:</span>
+                    A timelapse captures the transformation of tea in a teapot as the temperature rapidly rises
+                    above 100°C.
+                </div>
+                <div class="pair">
+                    <div>
+                        <div class="video-wrapper">
+                            <video controls loop muted>
+                                <source src="assets/high_quality_video/pair06/baseline.mp4" type="video/mp4">
+                            </video>
+                        </div>
+                        <div class="video-label">Baseline</div>
+                    </div>
+                    <div>
+                        <div class="video-wrapper">
+                            <video controls loop muted>
+                                <source src="assets/high_quality_video/pair06/ours.mp4" type="video/mp4">
+                            </video>
+                        </div>
+                        <div class="video-label">Ours</div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Pair 7 -->
+            <div class="video-card">
+                <div class="prompt">
+                    <span>Prompt 7:</span>
+                    A timelapse captures the transformation of water in a pot as the temperature rapidly rises above 100°C.
+                </div>
+                <div class="pair">
+                    <div>
+                        <div class="video-wrapper">
+                            <video controls loop muted>
+                                <source src="assets/high_quality_video/pair07/baseline.mp4" type="video/mp4">
+                            </video>
+                        </div>
+                        <div class="video-label">Baseline</div>
+                    </div>
+                    <div>
+                        <div class="video-wrapper">
+                            <video controls loop muted>
+                                <source src="assets/high_quality_video/pair07/ours.mp4" type="video/mp4">
+                            </video>
+                        </div>
+                        <div class="video-label">Ours</div>
+                    </div>
+                </div>
+            </div>
+
+        </div>
+    </section>
+</div>
 </body>
 
 </html>
